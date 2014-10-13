@@ -50,7 +50,7 @@ public class ChartActivity extends Activity{
         //setup Y-axis
         DateRange xDefaultRange = new DateRange(
                 new GregorianCalendar(2010, Calendar.JANUARY, 1).getTime(),
-                new GregorianCalendar(2011, Calendar.DECEMBER, 31).getTime());
+                new GregorianCalendar(2010, Calendar.DECEMBER, 31).getTime());
         xAxis.setDefaultRange(xDefaultRange);
         NumberAxis yAxis = new NumberAxis();
         mChart.addYAxis(yAxis);
@@ -60,9 +60,12 @@ public class ChartActivity extends Activity{
 
         GregorianCalendar date = new GregorianCalendar(2010, Calendar.JANUARY, 1);
         Random random = new Random();
-        for (int i=0 ; i<60 ; i++){
-            dataAdapter.add(new DataPoint<Date, Integer>(date.getTime(), random.nextInt(100)));
+        int start = 100;
+        for (int i=0 ; i<24 ; i++){
+            int jump = random.nextInt(50) + start;
+            dataAdapter.add(new DataPoint<Date, Integer>(date.getTime(), jump));
             date.add(GregorianCalendar.MONTH, 1);
+            start = jump;
         }
 
         LineSeries lineSeries = new LineSeries();
